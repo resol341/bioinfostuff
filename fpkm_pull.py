@@ -32,14 +32,27 @@ def get_genelist_file(filename):
         non_redundant_genelist = list(set(genelist))
     return non_redundant_genelist
 def fpkm_filter_keyword(candidates):
-    with open("FPKM_minus14171619_rearrange.txt") as fpkm_minus_full:
-        firstline = fpkm_minus_full.readline().rstrip()
-        lines = fpkm_minus_full.readlines()
+    message = "Please type the full file name of the input FPKM file: "
+    input_fpkm = input(message)
+    with open(input_fpkm) as fpkm_input:
+        firstline = fpkm_input.readline().rstrip()
+        lines = fpkm_input.readlines()
     filename = input("Please type a name for the generated FPKM table: ")
-    with open(filename, 'w') as fpkm_minus_select:
-        fpkm_minus_select.write(firstline + '\n')
+    with open(filename, 'w') as fpkm_output:
+        fpkm_output.write(firstline + '\n')
         for line in lines:
             line_split = line.split('\t')
             for candidate in candidates:
                 if candidate == line_split[0]:
-                    fpkm_minus_select.write(line)
+                    fpkm_output.write(line)
+greeting_message = "Please select 1 for kegg pathway input or 2 for gene list file input: "
+selection = input(greeting_message)
+if selection == "1":
+    pathway_list = pathway_input()
+    genelist = []
+    for pathway in pathway_list:
+        genelist = genelist + get_genelist_kegg(pathway)
+        print(genelist)
+        fpkm_filter_keyword(genelist)
+else:
+    print("WIP")
