@@ -6,5 +6,5 @@ with open('genes.read_group_tracking') as fpkm_orig:
             n = n + 1
             fields = line.rstrip().rsplit('\t')
             fpkm_target.write(fields[0] + '\t' + fields[6] + '\t')
-            if n % 14 == 0:
+            if n % 12 == 0:
                 fpkm_target.write('\n')
