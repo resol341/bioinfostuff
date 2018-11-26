@@ -52,7 +52,12 @@ if selection == "1":
     genelist = []
     for pathway in pathway_list:
         genelist = genelist + get_genelist_kegg(pathway)
-        print(genelist)
+        #print(genelist)
         fpkm_filter_keyword(genelist)
+elif selection == "2":
+    genelist_file_message = "Please enter name of the file that contains the genelist: "
+    genelist_file = input(genelist_file_message)
+    genelist = get_genelist_file(genelist_file)
+    fpkm_filter_keyword(genelist)
 else:
-    print("WIP")
+    print("Invalid input, please try again")
