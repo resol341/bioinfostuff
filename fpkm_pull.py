@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def pathway_input():
     """Accept pathway input and store in a list"""
     pathways = []
