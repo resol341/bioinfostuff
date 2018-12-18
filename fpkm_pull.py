@@ -10,6 +10,8 @@ def pathway_input():
         else:
             pathways.append(pathway)
     return pathways
+
+
 def get_genelist_kegg(pathway):
     import urllib.request
     genelist = []
@@ -27,11 +29,15 @@ def get_genelist_kegg(pathway):
                 except ValueError:
                     pass
     return genelist
+
+
 def get_genelist_file(filename):
     with open(filename) as genelist_file:
         genelist = [line.rstrip() for line in genelist_file]
         non_redundant_genelist = list(set(genelist))
     return non_redundant_genelist
+
+
 def fpkm_filter_keyword(candidates):
     message = "Please type the full file name of the input FPKM file: "
     input_fpkm = input(message)
@@ -46,6 +52,8 @@ def fpkm_filter_keyword(candidates):
             for candidate in candidates:
                 if candidate == line_split[0]:
                     fpkm_output.write(line)
+
+
 greeting_message = "Please select 1 for kegg pathway input or 2 for gene list file input: "
 selection = input(greeting_message)
 if selection == "1":
