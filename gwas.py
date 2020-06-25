@@ -1,5 +1,5 @@
 with open('cad.add.160614.website.txt') as gwas:
-    firstline = gwas.readline().rstrip()
+    firstline = gwas.readline()
     lines = gwas.readlines()
     with open('gwas_PTEN.txt', 'w') as gwas_pten:
         gwas_pten.write(firstline)
