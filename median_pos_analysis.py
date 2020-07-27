@@ -1,4 +1,6 @@
-with open ("median_data.txt") as median_data:
+#import csv
+#import numpy as np, scipy.stats as st
+with open("median_data.txt") as median_data:
     with open ("pos_markers.txt", 'w') as pos_markers:
         markers = median_data.readline().rstrip().split("\t")
         lines = median_data.readlines()
