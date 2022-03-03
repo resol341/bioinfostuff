@@ -44,14 +44,17 @@ def fpkm_filter_keyword(candidates):
     with open(input_fpkm) as fpkm_input:
         firstline = fpkm_input.readline().rstrip()
         lines = fpkm_input.readlines()
-    filename = input("Please type a name for the generated FPKM table: ")
-    with open(filename, 'w') as fpkm_output:
-        fpkm_output.write(firstline + '\n')
-        for line in lines:
-            line_split = line.split('\t')
-            for candidate in candidates:
-                if candidate == line_split[0]:
-                    fpkm_output.write(line)
+        print(firstline)
+        col = input("Please identify the column number containing the ID in genelist: ")
+        col_py = int(col) - 1
+        filename = input("Please type a name for the generated FPKM table: ")
+        with open(filename, 'w') as fpkm_output:
+            fpkm_output.write(firstline + '\n')
+            for line in lines:
+                line_split = line.split('\t')
+                for candidate in candidates:
+                    if candidate == line_split[col_py]:
+                        fpkm_output.write(line)
 
 
 greeting_message = "Please select 1 for kegg pathway input or 2 for gene list file input: "
@@ -62,7 +65,7 @@ if selection == "1":
     for pathway in pathway_list:
         genelist = genelist + get_genelist_kegg(pathway)
         #print(genelist)
-        fpkm_filter_keyword(genelist)
+        fpkm_filter_keyword(genelist,col)
 elif selection == "2":
     genelist_file_message = "Please enter name of the file that contains the genelist: "
     genelist_file = input(genelist_file_message)
